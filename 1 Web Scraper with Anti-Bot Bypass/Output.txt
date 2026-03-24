@@ -1,0 +1,43 @@
+PS E:\Intern Work\Python\python> python -u "e:\Intern Work\Python\python\1 Web Scraper with Anti-Bot Bypass\scraper.py"
+240 price changes found
+[START] Scraper started
+[INFO] Scraping page 1
+Using User Agent Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X) AppleWebKit/605.1.15 Version/16.0 Mobile Safari/604.1
+[INFO] 20 products extracted
+[INFO] Sleeping for 2.31 seconds...
+[INFO] Scraping page 2
+Using User Agent Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36    
+[INFO] 20 products extracted
+[INFO] Sleeping for 5.90 seconds...
+[INFO] Scraping page 3
+Using User Agent Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 Chrome/120.0.0.0 Mobile Safari/537.36       
+[INFO] 20 products extracted
+[INFO] Sleeping for 1.03 seconds...
+[INFO] Scraping page 4
+Using User Agent Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0
+[INFO] 20 products extracted
+[INFO] Sleeping for 6.82 seconds...
+[INFO] Scraping page 5
+Using User Agent Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36    
+[INFO] 20 products extracted
+[INFO] Sleeping for 9.41 seconds...
+[DONE] Total products: 100
+Saved to Database
+Showing from database
+(1, 'A Light in the Attic', 51.77, '2026-03-24')
+(2, 'Tipping the Velvet', 53.74, '2026-03-24')
+(3, 'Soumission', 50.1, '2026-03-24')
+(4, 'Sharp Objects', 47.82, '2026-03-24')
+(5, 'Sapiens: A Brief History of Humankind', 54.23, '2026-03-24')
+(6, 'The Requiem Red', 22.65, '2026-03-24')
+(7, 'The Dirty Little Secrets of Getting Your Dream Job', 33.34, '2026-03-24')
+(8, 'The Coming Woman: A Novel Based on the Life of the Infamous Feminist, Victoria Woodhull', 17.93, '2026-03-24')
+(9, 'The Boys in the Boat: Nine Americans and Their Epic Quest for Gold at the 1936 Berlin Olympics', 22.6, '2026-03-24')
+(10, 'The Black Maria', 52.15, '2026-03-24')
+648 price changes found
+    id_new                  name  price_new    date_new  id_old  price_old    date_old     change
+2        1  A Light in the Attic      51.77  2026-03-24     201      59.77  2026-03-23 -13.384641
+5        1  A Light in the Attic      51.77  2026-03-24     481      54.77  2026-03-23  -5.477451
+8        2    Tipping the Velvet      53.74  2026-03-24     202      57.74  2026-03-23  -6.927607
+10       2    Tipping the Velvet      53.74  2026-03-24     282      62.74  2026-03-23 -14.344916
+11       2    Tipping the Velvet      53.74  2026-03-24     482      61.74  2026-03-23 -12.957564
