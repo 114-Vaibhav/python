@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Room</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+
+    <div class="bg-white shadow-lg rounded-lg p-6 w-full max-w-md">
+
+        <h2 class="text-xl font-bold mb-4 text-center">Chat App</h2>
+
+        <!-- Join Section -->
+        <div class="flex gap-2 mb-3">
+            <input id="username" placeholder="Name" class="border p-2 rounded w-1/2">
+            <input id="room" placeholder="Room" class="border p-2 rounded w-1/2">
+        </div>
+
+        <button onclick="connect()" class="w-full bg-blue-500 text-white py-2 rounded mb-3">
+            Join Room
+        </button>
+
+        <!-- Online Users -->
+        <div id="online" class="text-sm text-gray-600 mb-2"></div>
+
+        <!-- Messages -->
+        <ul id="messages" class="h-64 overflow-y-auto border p-2 mb-3 rounded"></ul>
+
+        <div class="flex gap-2">
+            <input id="msg" placeholder="Message" class="border p-2 rounded w-full">
+            <button onclick="send()" class="bg-green-500 text-white px-4 rounded">Send</button>
+        </div>
+
+    </div>
+
+    <script>
+        let ws;
+        let typingTimeout;
+
+        // ✅ FIXED: scroll targets correct element
+        function scrollToBottom() {
+            const chatBox = document.getElementById("messages"); // ✅ was wrong
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function connect() {
+            ws = new WebSocket("ws://127.0.0.1:8000/ws");
+
+            ws.onopen = () => {
+                ws.send(document.getElementById("username").value);
+                ws.send(document.getElementById("room").value);
+            };
+
+            ws.onmessage = (event) => {
+                if (event.data.startsWith("Online:")) {
+                    document.getElementById("online").innerText = event.data;
+                    return;
+                }
+
+                let li = document.createElement("li");
+                li.innerText = event.data;
+                document.getElementById("messages").appendChild(li);
+
+                scrollToBottom(); // ✅ auto-scroll
+            };
+        }
+
+        let isTyping = false;
+
+        document.getElementById("msg").addEventListener("input", () => {
+            if (!ws) return;
+
+            if (!isTyping) {
+                ws.send("TYPING");
+                isTyping = true;
+            }
+
+            clearTimeout(typingTimeout);
+            typingTimeout = setTimeout(() => {
+                isTyping = false;
+            }, 1000);
+        });
+
+        function send() {
+            ws.send(document.getElementById("msg").value);
+            document.getElementById("msg").value = "";
+        }
+    </script>
+
+</body>
+
+</html>
