@@ -1,0 +1,89 @@
+
+class User(Model):
+    name = CharField(max_length=100)
+    email = CharField(unique=True)
+    age = IntegerField(nullable=True)
+
+
+class Post(Model):
+    title = CharField()
+    author = ForeignKey(User, related_name="posts")
+
+
+User.create_table()
+Post.create_table()
+
+
+alice = User(name="Alice", email="alice@example.com", age=30)
+alice.save()
+alice1 = User(name="Vaibhav", email="vaibhav@example.com", age=40)
+alice1.save()
+alice2 = User(name="Raghav", email="raghav@example.com", age=20)
+alice2.save()
+
+
+post = Post(title="Hello World", author=alice)
+post.save()
+post1 = Post(title="Hi I am Vaibhav", author=alice1)
+post1.save()
+post2 = Post(title="Hello, I am VG", author=alice1)
+post2.save()
+
+
+users = User.filter(age__gte=25).order_by("-name").all()
+print("\n-------------Users whose age more than 25---------------\n ")
+print(users,"\n")
+
+
+print("\n----------------- Posts------------------------\n ")
+print(alice1.posts,"\n")
+
+
+post.delete()
+alice.delete()
+
+
+
+PS E:\Intern Work\Python\python> python -u "e:\Intern Work\Python\python\3 Custom ORM (Object-Relational Mapper)\main.py"
+
+SQL: CREATE TABLE IF NOT EXISTS user (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(100) NOT NULL, email VARCHAR(255) NOT NULL UNIQUE, age INTEGER);
+Table 'user' created.
+
+SQL: CREATE TABLE IF NOT EXISTS post (id INTEGER PRIMARY KEY AUTOINCREMENT, title VARCHAR(255) NOT NULL, author_id INTEGER NOT NULL, FOREIGN KEY (author_id) REFERENCES user(id));
+Table 'post' created.
+
+SQL: INSERT INTO user (name, email, age) VALUES (?, ?, ?)
+Record saved: User(id=1, name='Alice', email='alice@example.com', age='30')
+
+SQL: INSERT INTO user (name, email, age) VALUES (?, ?, ?)
+Record saved: User(id=2, name='Vaibhav', email='vaibhav@example.com', age='40')
+
+SQL: INSERT INTO user (name, email, age) VALUES (?, ?, ?)
+Record saved: User(id=3, name='Raghav', email='raghav@example.com', age='20')
+
+SQL: INSERT INTO post (title, author_id) VALUES (?, ?)
+Record saved: Post(id=1, title='Hello World', author='User(id=1, name='Alice', email='alice@example.com', age='30')')
+
+SQL: INSERT INTO post (title, author_id) VALUES (?, ?)
+Record saved: Post(id=2, title='Hi I am Vaibhav', author='User(id=2, name='Vaibhav', email='vaibhav@example.com', age='40')')
+
+SQL: INSERT INTO post (title, author_id) VALUES (?, ?)
+Record saved: Post(id=3, title='Hello, I am VG', author='User(id=2, name='Vaibhav', email='vaibhav@example.com', age='40')')
+
+SQL: SELECT * FROM user WHERE age >= 25 ORDER BY name DESC;
+
+-------------Users whose age more than 25---------------
+
+[User(id=2, name='Vaibhav', email='vaibhav@example.com', age='40'), User(id=1, name='Alice', email='alice@example.com', age='30')]
+
+
+----------------- Posts------------------------
+
+SQL: SELECT * FROM post WHERE author_id = 2
+[Post(id=2, title='Hi I am Vaibhav', author='2'), Post(id=3, title='Hello, I am VG', author='2')]
+
+SQL: DELETE FROM post WHERE id = ?
+Deleted: Post(id=1, title='Hello World', author='User(id=1, name='Alice', email='alice@example.com', age='30')')
+
+SQL: DELETE FROM user WHERE id = ?
+Deleted: User(id=1, name='Alice', email='alice@example.com', age='30')
