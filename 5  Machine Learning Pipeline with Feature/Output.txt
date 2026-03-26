@@ -1,0 +1,46 @@
+PS E:\Intern Work\Python\python\5  Machine Learning Pipeline with Feature> python -u main.py
+
+---------------Data Preprocessing---------------
+
+Loaded 7,043 records (21 features)
+
+---------------Data Cleaning---------------
+
+
+Missing Values filled: Total Charges (0.2%)
+
+---------------Feature Engineering---------------
+    
+Engineered 4 new features: TenureGroup, TotalServices, AvgChargePerMonth, FamilyType
+
+---------------Feature Encoding---------------
+
+After Encoding: (7043, 39)
+
+----------------Outlier Removal----------
+
+After Outlier Removal: (7032, 39)
+
+---------------Scaling---------------
+
+After Scaling: (7032, 39)
+Training Data: (5625, 38)
+Testing Data: (1407, 38)
+
+---------------Model Training---------------
+
+
+----------Model Evaluation----------
+
++-------------------------+-----------+-----------+----------+--------+
+| Model                   | Accuracy  | Precision | Recall   | F1     |
++-------------------------+-----------+-----------+----------+--------+
+| Logistic Regression     | 0.805     | 0.672     | 0.524   | 0.589  |
+| Random Forest           | 0.790     | 0.640     | 0.483   | 0.550  |
+| SVM                     | 0.798     | 0.681     | 0.453   | 0.544  |
+| XGBoost (tuned)         | 0.801     | 0.658     | 0.525   | 0.584  |
++-------------------------+-----------+-----------+----------+--------+
+
+Best Model: Logistic Regression
+
+Model saved to churn_model.pkl
