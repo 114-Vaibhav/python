@@ -1,0 +1,33 @@
+PS E:\Intern Work\Python\python\4 Distributed Task Queue> python -u main.py                                     
+[WORKER-1] Started
+[WORKER-3] Started
+[WORKER-2] Started
+Task queued: d2060096 [WORKER-1] Running d2060096: 
+
+Task queued: 56c38176 
+[WORKER-3] Running 56c38176: 
+Task queued: 7d5633a7 
+[WORKER-2] Running 7d5633a7: 
+[ERROR] 7d5633a7 → SMTP Error
+[RETRY] Task 7d5633a7 retry 1 in 2s
+Task queued: d9c006dd 
+[SUCCESS] d2060096 in 1.00s
+[SUCCESS] 56c38176 in 1.00s
+[WORKER-1] Running d9c006dd: 
+[ERROR] d9c006dd → SMTP Error
+[RETRY] Task d9c006dd retry 1 in 2s
+[WORKER-3] Running 7d5633a7: 
+[SUCCESS] 7d5633a7 in 0.00s
+[WORKER-2] Running d9c006dd: 
+[ERROR] d9c006dd → SMTP Error
+[RETRY] Task d9c006dd retry 2 in 4s
+[WORKER-3] Running d9c006dd: 
+[SUCCESS] d9c006dd in 0.00s
+
+=== DASHBOARD ===
+results:7d5633a7 {'status': 'SUCCESS', 'result': 'Email sent to vg@presidio.com', 'duration': 0.0, 'retries': 1}
+results:9dd06636 {'status': 'SUCCESS', 'result': '/thumbs/1504_[256, 256].jpg', 'duration': 1.001060962677002, 'retries': 0}
+results:d9c006dd {'status': 'SUCCESS', 'result': 'Email sent to vgp@prd.com', 'duration': 0.0, 'retries': 2}    
+results:d2060096 {'status': 'SUCCESS', 'result': '/thumbs/1504_[256, 256].jpg', 'duration': 1.00038480758667, 'retries': 0}
+results:fb6cd057 {'status': 'SUCCESS', 'result': '/thumbs/2611_[256, 256].jpg', 'duration': 1.0008182525634766, 'retries': 0}
+results:56c38176 {'status': 'SUCCESS', 'result': '/thumbs/2611_[256, 256].jpg', 'duration': 1.0008039474487305, 'retries': 0}
