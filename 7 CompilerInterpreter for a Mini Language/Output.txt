@@ -1,0 +1,115 @@
+===---------------- Source Code (MiniLang) -----------===
+let x = 10;
+let y = 20;
+let z = x + y;
+print(z);
+
+
+
+===----------- Lexer Output ---------------===
+[LET, IDENT("x"), ASSIGN, INT(10), SEMICOLON, LET, IDENT("y"), ASSIGN, INT(20), SEMICOLON, LET, IDENT("z"), ASSIGN, IDENT("x"), PLUS, IDENT("y"), SEMICOLON, PRINT, LPAREN, IDENT("z"), RPAREN, SEMICOLON, EOF]
+
+
+
+=== ----------------AST ------------------ ===
+Program([Let(x, Number(10)), Let(y, Number(20)), Let(z, Binary(Identifier(x), PLUS, Identifier(y))), Print(Identifier(z))])
+
+
+
+=== ----------------AST (abbreviated)------------------ ===
+Program
+|   |-- LetDecl("x", Literal(10))
+|   |-- LetDecl("y", Literal(20))
+|   |-- LetDecl("z", BinOp(PLUS, Ident("x"), Ident("y")))
+    \-- PrintStmt(Ident("z"))
+
+
+
+=== --------------------Interpreter Output ------------------===
+30
+
+
+
+===---------------- Source Code (MiniLang) -----------===
+fn fibonacci(n) {
+if n <= 1 { return n }
+return fibonacci(n - 1) + fibonacci(n - 2)
+}
+let result = fibonacci(10)
+print("Fibonacci(10) = " + str(result))
+
+
+
+===----------- Lexer Output ---------------===
+[FN, IDENT("fibonacci"), LPAREN, IDENT("n"), RPAREN, LBRACE, IF, IDENT("n"), LTE, INT(1), LBRACE, RETURN, IDENT("n"), RBRACE, RETURN, IDENT("fibonacci"), LPAREN, IDENT("n"), MINUS, INT(1), RPAREN, PLUS, IDENT("fibonacci"), LPAREN, IDENT("n"), MINUS, INT(2), RPAREN, RBRACE, LET, IDENT("result"), ASSIGN, IDENT("fibonacci"), LPAREN, INT(10), RPAREN, PRINT, LPAREN, STRING("Fibonacci(10) = "), PLUS, IDENT("str"), LPAREN, IDENT("result"), RPAREN, RPAREN, EOF]
+
+
+
+=== ----------------AST ------------------ ===
+Program([Function(fibonacci, ['n'], Block([If(Binary(Identifier(n), LTE, Number(1)), Block([Return(Identifier(n))]), None), Return(Binary(Call(Identifier(fibonacci), [Binary(Identifier(n), MINUS, Number(1))]), PLUS, Call(Identifier(fibonacci), [Binary(Identifier(n), MINUS, Number(2))])))])), Let(result, Call(Identifier(fibonacci), [Number(10)])), Print(Binary(StringLiteral('Fibonacci(10) = '), PLUS, Call(Identifier(str), [Identifier(result)])))])
+
+
+
+=== ----------------AST (abbreviated)------------------ ===
+Program
+|   |-- FunctionDecl("fibonacci", params=['n'])
+|   |   |-- IfStatement(condition=BinOp(LTE, Ident("n"), Literal(1)))
+|   |   |   \-- ReturnStmt(Ident("n"))
+|   |   \-- ReturnStmt(BinOp(PLUS, Call("fibonacci", [BinOp(MINUS, Ident("n"), Literal(1))]), Call("fibonacci", [BinOp(MINUS, Ident("n"), Literal(2))])))
+|   |-- LetDecl("result", Call("fibonacci", [Literal(10)]))
+    \-- PrintStmt(BinOp(PLUS, String("Fibonacci(10) = "), Call("str", [Ident("result")])))
+
+
+
+=== --------------------Interpreter Output ------------------===
+Fibonacci(10) = 55
+
+
+===---------------- Source Code (MiniLang) -----------===
+let x = 10; let y = 20; fn add(a, b) { return a + b; } fn compare(n) { if (n <= 10) { print("less or equal"); } if (n >= 20) { print("greater or equal"); } if (n == 15) { print("equal"); } if (n != 0) { print("not zero"); } if (n < 5) { print("less"); } if (n > 5) { print("greater"); } return n; } let result = compare(add(x, y)); print("Result: " + str(result));
+
+
+
+===----------- Lexer Output ---------------===
+[LET, IDENT("x"), ASSIGN, INT(10), SEMICOLON, LET, IDENT("y"), ASSIGN, INT(20), SEMICOLON, FN, IDENT("add"), LPAREN, IDENT("a"), COMMA, IDENT("b"), RPAREN, LBRACE, RETURN, IDENT("a"), PLUS, IDENT("b"), SEMICOLON, RBRACE, FN, IDENT("compare"), LPAREN, IDENT("n"), RPAREN, LBRACE, IF, LPAREN, IDENT("n"), LTE, INT(10), RPAREN, LBRACE, PRINT, LPAREN, STRING("less or equal"), RPAREN, SEMICOLON, RBRACE, IF, LPAREN, IDENT("n"), GTE, INT(20), RPAREN, LBRACE, PRINT, LPAREN, STRING("greater or equal"), RPAREN, SEMICOLON, RBRACE, IF, LPAREN, IDENT("n"), EQ, INT(15), RPAREN, LBRACE, PRINT, LPAREN, STRING("equal"), RPAREN, SEMICOLON, RBRACE, IF, LPAREN, IDENT("n"), GTE, INT(0), RPAREN, LBRACE, PRINT, LPAREN, STRING("not zero"), RPAREN, SEMICOLON, RBRACE, IF, LPAREN, IDENT("n"), LT, INT(5), RPAREN, LBRACE, PRINT, LPAREN, STRING("less"), RPAREN, SEMICOLON, RBRACE, IF, LPAREN, IDENT("n"), GT, INT(5), RPAREN, LBRACE, PRINT, LPAREN, STRING("greater"), RPAREN, SEMICOLON, RBRACE, RETURN, IDENT("n"), SEMICOLON, RBRACE, LET, IDENT("result"), ASSIGN, IDENT("compare"), LPAREN, IDENT("add"), LPAREN, IDENT("x"), COMMA, IDENT("y"), RPAREN, RPAREN, SEMICOLON, PRINT, LPAREN, STRING("Result: "), PLUS, IDENT("str"), LPAREN, IDENT("result"), RPAREN, RPAREN, SEMICOLON, EOF]
+
+
+
+=== ----------------AST ------------------ ===
+Program([Let(x, Number(10)), Let(y, Number(20)), Function(add, ['a', 'b'], Block([Return(Binary(Identifier(a), PLUS, Identifier(b)))])), Function(compare, ['n'], Block([If(Binary(Identifier(n), LTE, Number(10)), Block([Print(StringLiteral('less or equal'))]), None), If(Binary(Identifier(n), GTE, Number(20)), Block([Print(StringLiteral('greater or equal'))]), None), If(Binary(Identifier(n), EQ, Number(15)), Block([Print(StringLiteral('equal'))]), None), If(Binary(Identifier(n), GTE, Number(0)), Block([Print(StringLiteral('not zero'))]), None), If(Binary(Identifier(n), LT, Number(5)), Block([Print(StringLiteral('less'))]), None), If(Binary(Identifier(n), GT, Number(5)), Block([Print(StringLiteral('greater'))]), None), Return(Identifier(n))])), Let(result, Call(Identifier(compare), [Call(Identifier(add), [Identifier(x), Identifier(y)])])), Print(Binary(StringLiteral('Result: '), PLUS, Call(Identifier(str), [Identifier(result)])))])
+
+
+
+=== ----------------AST (abbreviated)------------------ ===
+Program
+|   |-- LetDecl("x", Literal(10))
+|   |-- LetDecl("y", Literal(20))
+|   |-- FunctionDecl("add", params=['a', 'b'])
+|   |   \-- ReturnStmt(BinOp(PLUS, Ident("a"), Ident("b")))
+|   |-- FunctionDecl("compare", params=['n'])
+|   |   |-- IfStatement(condition=BinOp(LTE, Ident("n"), Literal(10)))
+|   |   |   \-- PrintStmt(String("less or equal"))
+|   |   |-- IfStatement(condition=BinOp(GTE, Ident("n"), Literal(20)))
+|   |   |   \-- PrintStmt(String("greater or equal"))
+|   |   |-- IfStatement(condition=BinOp(EQ, Ident("n"), Literal(15)))
+|   |   |   \-- PrintStmt(String("equal"))
+|   |   |-- IfStatement(condition=BinOp(GTE, Ident("n"), Literal(0)))
+|   |   |   \-- PrintStmt(String("not zero"))
+|   |   |-- IfStatement(condition=BinOp(LT, Ident("n"), Literal(5)))
+|   |   |   \-- PrintStmt(String("less"))
+|   |   |-- IfStatement(condition=BinOp(GT, Ident("n"), Literal(5)))
+|   |   |   \-- PrintStmt(String("greater"))
+|   |   \-- ReturnStmt(Ident("n"))
+|   |-- LetDecl("result", Call("compare", [Call("add", [Ident("x"), Ident("y")])]))
+    \-- PrintStmt(BinOp(PLUS, String("Result: "), Call("str", [Ident("result")])))
+
+
+
+=== --------------------Interpreter Output ------------------===
+greater or equal
+not zero
+greater
+Result: 30
+
+
+
