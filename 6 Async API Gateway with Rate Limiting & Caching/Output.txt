@@ -1,0 +1,105 @@
+PS E:\Intern Work\Python\python\6 Async API Gateway with Rate Limiting & Caching> uvicorn main:app --reload
+INFO:     Will watch for changes in these directories: ['E:\\Intern Work\\Python\\python\\6 Async API Gateway with Rate Limiting & Caching']
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [18344] using WatchFiles
+INFO:     Started server process [7260]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+[REQ] GET /api/users/42 → CACHE MISS
+[REQ] GET /api/users/42 → DOWNSTREAM ERROR — 503
+INFO:     127.0.0.1:54292 - "GET /api/users/42 HTTP/1.1" 503 Service Unavailable
+INFO:     127.0.0.1:54292 - "GET /favicon.ico HTTP/1.1" 200 OK
+[REQ] GET /api/users/42 → CACHE MISS
+[REQ] GET /api/users/42 → PROXY to /api/users — 200 OK in 302ms
+INFO:     127.0.0.1:65339 - "GET /api/users/42 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65339 - "GET /favicon.ico HTTP/1.1" 200 OK
+[REQ] GET /api/orders/1 → CACHE MISS
+[REQ] GET /api/orders/1 → PROXY to /api/orders — 500 OK in 278ms
+INFO:     127.0.0.1:62231 - "GET /api/orders/1 HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:62231 - "GET /favicon.ico HTTP/1.1" 200 OK
+[REQ] GET /api/products/42 → CACHE MISS
+[REQ] GET /api/products/42 → PROXY to /api/products — 200 OK in 281ms
+INFO:     127.0.0.1:62231 - "GET /api/products/42 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62231 - "GET /favicon.ico HTTP/1.1" 200 OK
+[REQ] GET /api/products/42 → CACHE HIT (TTL: 48s) — 200 OK
+INFO:     127.0.0.1:54048 - "GET /api/products/42 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54048 - "GET /favicon.ico HTTP/1.1" 200 OK
+[REQ] GET /api/products/42 → CACHE HIT (TTL: 47s) — 200 OK
+INFO:     127.0.0.1:54048 - "GET /api/products/42 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54048 - "GET /favicon.ico HTTP/1.1" 200 OK
+[REQ] GET /api/products/42 → CACHE HIT (TTL: 44s) — 200 OK
+INFO:     127.0.0.1:54048 - "GET /api/products/42 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54048 - "GET /favicon.ico HTTP/1.1" 200 OK
+[REQ] GET /api/products/42 → CACHE HIT (TTL: 44s) — 200 OK
+INFO:     127.0.0.1:54048 - "GET /api/products/42 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54048 - "GET /favicon.ico HTTP/1.1" 200 OK
+[REQ] GET /api/products/42 → CACHE HIT (TTL: 43s) — 200 OK
+INFO:     127.0.0.1:54048 - "GET /api/products/42 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54048 - "GET /favicon.ico HTTP/1.1" 200 OK
+[REQ] GET /api/products/42 client=127.0.0.1 → RATE LIMITED (6/5)
+INFO:     127.0.0.1:54048 - "GET /api/products/42 HTTP/1.1" 429 Too Many Requests
+INFO:     127.0.0.1:54048 - "GET /favicon.ico HTTP/1.1" 200 OK
+[REQ] GET /api/products/42 client=127.0.0.1 → RATE LIMITED (7/5)
+INFO:     127.0.0.1:54048 - "GET /api/products/42 HTTP/1.1" 429 Too Many Requests
+INFO:     127.0.0.1:54048 - "GET /favicon.ico HTTP/1.1" 200 OK
+[REQ] GET /api/users/42 client=127.0.0.1 → RATE LIMITED (8/5)
+INFO:     127.0.0.1:57501 - "GET /api/users/42 HTTP/1.1" 429 Too Many Requests
+INFO:     127.0.0.1:57501 - "GET /favicon.ico HTTP/1.1" 200 OK
+[REQ] GET /api/orders/1 → CACHE MISS
+[REQ] GET /api/orders/1 → PROXY to /api/orders — 500 OK in 285ms
+INFO:     127.0.0.1:58789 - "GET /api/orders/1 HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:58789 - "GET /api/orders/1 HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:58789 - "GET /favicon.ico HTTP/1.1" 200 OK
+[REQ] GET /api/orders/1 → CACHE MISS
+[REQ] GET /api/orders/1 → PROXY to /api/orders — 500 OK in 277ms
+INFO:     127.0.0.1:58789 - "GET /api/orders/1 HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:58789 - "GET /favicon.ico HTTP/1.1" 200 OK
+[REQ] GET /api/orders/1 client=127.0.0.1 → RATE LIMITED (6/5)
+INFO:     127.0.0.1:58789 - "GET /api/orders/1 HTTP/1.1" 429 Too Many Requests
+INFO:     127.0.0.1:58789 - "GET /favicon.ico HTTP/1.1" 200 OK
+[REQ] GET /api/orders/1 → CACHE MISS
+[REQ] GET /api/orders/1 → PROXY to /api/orders — 500 OK in 277ms
+INFO:     127.0.0.1:58789 - "GET /api/orders/1 HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:58789 - "GET /favicon.ico HTTP/1.1" 200 OK
+[REQ] GET /api/orders/1 client=127.0.0.1 → RATE LIMITED (6/5)
+INFO:     127.0.0.1:58789 - "GET /api/orders/1 HTTP/1.1" 429 Too Many Requests
+INFO:     127.0.0.1:58789 - "GET /favicon.ico HTTP/1.1" 200 OK
+[REQ] GET /api/orders/1 client=127.0.0.1 → RATE LIMITED (7/5)
+INFO:     127.0.0.1:50851 - "GET /api/orders/1 HTTP/1.1" 429 Too Many Requests
+INFO:     127.0.0.1:50851 - "GET /favicon.ico HTTP/1.1" 200 OK
+[REQ] GET /api/orders/1 → CACHE MISS
+[REQ] GET /api/orders/1 → PROXY to /api/orders — 500 OK in 232ms
+INFO:     127.0.0.1:55746 - "GET /api/orders/1 HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55746 - "GET /favicon.ico HTTP/1.1" 200 OK
+[REQ] GET /api/orders/1 → CACHE MISS
+[REQ] GET /api/orders/1 → CIRCUIT OPEN (/api/orders) — 503
+INFO:     127.0.0.1:55746 - "GET /api/orders/1 HTTP/1.1" 503 Service Unavailable
+INFO:     127.0.0.1:55746 - "GET /favicon.ico HTTP/1.1" 200 OK
+[REQ] GET /api/orders/1 → CACHE MISS
+[REQ] GET /api/orders/1 → CIRCUIT OPEN (/api/orders) — 503
+INFO:     127.0.0.1:56547 - "GET /api/orders/1 HTTP/1.1" 503 Service Unavailable
+INFO:     127.0.0.1:56547 - "GET /favicon.ico HTTP/1.1" 200 OK
+[REQ] GET /api/orders/1 → CACHE MISS
+[REQ] GET /api/orders/1 → CIRCUIT OPEN (/api/orders) — 503
+INFO:     127.0.0.1:64898 - "GET /api/orders/1 HTTP/1.1" 503 Service Unavailable
+INFO:     127.0.0.1:64898 - "GET /favicon.ico HTTP/1.1" 200 OK
+[REQ] GET /api/orders/1 → CACHE MISS
+[REQ] GET /api/orders/1 → PROXY to /api/orders — 500 OK in 287ms
+INFO:     127.0.0.1:55580 - "GET /api/orders/1 HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55580 - "GET /favicon.ico HTTP/1.1" 200 OK
+[REQ] GET /api/orders/1 client=127.0.0.1 → RATE LIMITED (6/5)
+INFO:     127.0.0.1:55580 - "GET /api/orders/1 HTTP/1.1" 429 Too Many Requests
+INFO:     127.0.0.1:55580 - "GET /favicon.ico HTTP/1.1" 200 OK
+
+
+
+=== Health Dashboard ===
++------------------+--------+---------+----------+-------------+
+| Service          | Status | Latency | Circuit  | Cache Hits  |
++------------------+--------+---------+----------+-------------+
+| /api/users       | UP     | 272ms   | CLOSED   | 2           |
+| /api/orders      | DOWN   | 273ms   | OPEN     | 0           |
+| /api/products    | UP     | 272ms   | CLOSED   | 5           |
++------------------+--------+---------+----------+-------------+
+INFO:     127.0.0.1:56562 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56562 - "GET /favicon.ico HTTP/1.1" 200 OK
