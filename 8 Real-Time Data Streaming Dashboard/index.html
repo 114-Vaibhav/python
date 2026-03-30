@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Time Data Stream</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+</head>
+
+<body>
+    <h1 class="text-4xl font-extrabold text-center text-blue-600 my-8 underline">
+        Real Time Data Stream
+    </h1>
+
+    <div class="max-w-7xl mx-auto space-y-6">
+
+        <div class="bg-white shadow-md rounded-lg p-6 border border-gray-200">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Live Sensor Data</h2>
+            <p id="stream" class="text-xl text-gray-800 font-mono"></p>
+        </div>
+
+        <div class="bg-white shadow-md rounded-lg p-6 border border-gray-200">
+            <h2 class="text-2xl font-semibold text-red-600 mb-4">Temperature (°F)</h2>
+            <canvas id="chartTemp" class="w-full h-64"></canvas>
+        </div>
+
+
+        <div class="bg-white shadow-md rounded-lg p-6 border border-gray-200">
+            <h2 class="text-2xl font-semibold text-blue-600 mb-4">Vibration</h2>
+            <canvas id="chartVibration" class="w-full h-64"></canvas>
+        </div>
+
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

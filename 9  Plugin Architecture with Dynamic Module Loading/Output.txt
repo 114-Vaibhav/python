@@ -1,0 +1,22 @@
+=== Application Startup ===
+$ sitegen build --theme dark-mode
+[CORE] Scanning plugin directory: plugins/
+[CORE] Discovered 4 plugins:
+- markdown-parser v2.1.0 (built-in)
+- dark-mode-theme v1.3.2 (third-party)
+- image-optimizer v0.9.1 (third-party)
+- rss-feed v1.0.0 (third-party, depends: markdown-parser)
+[CORE] Resolving dependencies...
+dark-mode-theme    (no dependencies)          OK
+image-optimizer    (no dependencies)          OK
+markdown-parser    (no dependencies)          OK
+rss-feed           -> markdown-parser          OK (satisfied)
+[CORE] Activating plugins in order...
+[1/4] markdown-parser.activate()  - registered: .md -> HTML converter
+[2/4] dark-mode-theme.activate()  - registered: theme "dark-mode"
+[3/4] image-optimizer.activate()  - registered: post-processor for .png/.jpg
+[4/4] rss-feed.activate()  - registered: command "generate-rss"
+[CORE] Building site...
+Processed 24 pages | Theme: dark-mode | RSS: feed.xml generated
+Images optimized: 18 files, saved 4.2 MB
+[CORE] Build complete -> ./dist/ (0.01s)
