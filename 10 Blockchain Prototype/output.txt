@@ -1,0 +1,92 @@
+
+=== Node Startup ===
+[NODE-1] Listening on port 5001 | Wallet: f4dae2...563d27
+[NODE-2] Listening on port 5002 | Wallet: 5a6e68...3ac852
+Node 1 listening on 127.0.0.1:5001
+Node 2 listening on 127.0.0.1:5002
+
+=== INITIAL MINING ===
+Mine reward added, current balance:  10
+[INFO] Block mined. Chain length: 2
+Node 1 connected by ('127.0.0.1', 61703)
+[Node 1] Sending chain
+Node 2 connected by ('127.0.0.1', 61704)
+[Node 2] Comparing chains
+[Node 2] Chain replaced
+
+=== TRANSACTION ===
+[NODE-1] Creating transaction:
+From:   f4dae2...563d27
+To:     5a6e68...3ac852
+Amount: 5 coins
+Signature: 56218a2133c9dce00b3f...  Valid
+Node 2 connected by ('127.0.0.1', 61728)
+[NODE-2] Transaction added to mempool
+Node 1 connected by ('127.0.0.1', 61729)
+
+=== MINING ===
+[NODE-2] Mining block #2...
+Difficulty: 4 (hash must start with 0000)
+Mine reward added, current balance:  15
+[INFO] Block mined. Chain length: 3
+[NODE-2] Block mined in 3.38s
+Hash:        0000b5d99ed1993f9c47...
+Prev Hash:   00004c0b634e9210ee19...
+Transactions: 2
+Miner Reward: 10 coin → 5a6e68...3ac852
+
+=== PROPAGATION ===
+Node 1 connected by ('127.0.0.1', 61790)
+[Node 1] Received block, validating...
+[Node 1] Invalid block rejected
+
+=== SYNC ===
+Node 2 connected by ('127.0.0.1', 61813)
+[Node 2] Sending chain
+Node 1 connected by ('127.0.0.1', 61814)
+[Node 1] Comparing chains
+[Node 1] Chain replaced
+
+=== WALLET BALANCES ===
+f4dae2...563d27: 0 coins
+5a6e68...3ac852: 15 coins
+
+=== FINAL CHAINS ===
+
+--- Node 1 Chain ---
+------------------>
+Index: 0
+Timestamp: 1234567890
+Transactions: []
+Previous Hash: 0
+Hash: 00008d170adb87243e999983ebfbeb67f3b22262aea29ec147166dbbfeca4387
+------------------>
+Index: 1
+Timestamp: 1774936176.5231054
+Transactions: [{'from_address': '0', 'to_address': 'f4dae267e5ca8d689a18d7c240f1bfe4e28cde94869735f5b129f7641e563d27', 'amount': 10, 'signature': None, 'public_key': None}]
+Previous Hash: 00008d170adb87243e999983ebfbeb67f3b22262aea29ec147166dbbfeca4387
+Hash: 00004c0b634e9210ee19121e23dd77a87476228b333140c23a3179940acee2e1
+------------------>
+Index: 2
+Timestamp: 1774936181.8605297
+Transactions: [{'from_address': 'f4dae267e5ca8d689a18d7c240f1bfe4e28cde94869735f5b129f7641e563d27', 'to_address': '5a6e68cd3efca339c316af5f9cbb7d48d9ecf7a90351d7a3254b1593643ac852', 'amount': 5, 'signature': b'V!\x8a!3\xc9\xdc\xe0\x0b?n\xcc\xf7R\x03\xc0;\xf0{?\xde\xf8\xe4\xba%\x92]\xe7\x8f\x1f\xb7\x9d4j\x8e[\xb1Z5\xb6\x08~n\xb0e\xf2\x0cg\xd0N\x10\x08S@\xad\xcaC\x81\xf5\xad\x87x\x90,', 'public_key': VerifyingKey.from_string(b'\x02\xc8\xa5\x8b\xfeH1\x8c\x9f\x0eu\xf6\xcd\xe37\x13\xec\xe0\x19\x06\xf6s\xb3\xa5{\xd5\xf14\x87=\x00\x86\xe1', SECP256k1, sha1)}, {'from_address': '0', 'to_address': '5a6e68cd3efca339c316af5f9cbb7d48d9ecf7a90351d7a3254b1593643ac852', 'amount': 10, 'signature': None, 'public_key': None}]
+Previous Hash: 00004c0b634e9210ee19121e23dd77a87476228b333140c23a3179940acee2e1
+Hash: 0000b5d99ed1993f9c47891c992715c9337b1a3548e77f5958663fc32412819c
+
+--- Node 2 Chain ---
+------------------>
+Index: 0
+Previous Hash: 0
+Hash: 00008d170adb87243e999983ebfbeb67f3b22262aea29ec147166dbbfeca4387
+------------------>
+Index: 1
+Timestamp: 1774936176.5231054
+Transactions: [{'from_address': '0', 'to_address': 'f4dae267e5ca8d689a18d7c240f1bfe4e28cde94869735f5b129f7641e563d27', 'amount': 10, 'signature': None, 'public_key': None}]
+Previous Hash: 00008d170adb87243e999983ebfbeb67f3b22262aea29ec147166dbbfeca4387
+Hash: 00004c0b634e9210ee19121e23dd77a87476228b333140c23a3179940acee2e1
+------------------>
+Index: 2
+Timestamp: 1774936181.8605297
+Transactions: [{'from_address': 'f4dae267e5ca8d689a18d7c240f1bfe4e28cde94869735f5b129f7641e563d27', 'to_address': '5a6e68cd3efca339c316af5f9cbb7d48d9ecf7a90351d7a3254b1593643ac852', 'amount': 5, 'signature': b'V!\x8a!3\xc9\xdc\xe0\x0b?n\xcc\xf7R\x03\xc0;\xf0{?\xde\xf8\xe4\xba%\x92]\xe7\x8f\x1f\xb7\x9d4j\x8e[\xb1Z5\xb6\x08~n\xb0e\xf2\x0cg\xd0N\x10\x08S@\xad\xcaC\x81\xf5\xad\x87x\x90,', 'public_key': VerifyingKey.from_string(b'\x02\xc8\xa5\x8b\xfeH1\x8c\x9f\x0eu\xf6\xcd\xe37\x13\xec\xe0\x19\x06\xf6s\xb3\xa5{\xd5\xf14\x87=\x00\x86\xe1', SECP256k1, sha1)}, {'from_address': '0', 'to_address': '5a6e68cd3efca339c316af5f9cbb7d48d9ecf7a90351d7a3254b1593643ac852', 'amount': 10, 'signature': '', 'public_key': None}]
+Previous Hash: 00004c0b634e9210ee19121e23dd77a87476228b333140c23a3179940acee2e1
+Hash: 0000b5d99ed1993f9c47891c992715c9337b1a3548e77f5958663fc32412819c
