@@ -1,0 +1,97 @@
+Results without Multiprocessing
+
+------------- Test Discovery -----------------
+Found 13 tests and  3 modules  
+
+------------- Loading Fixtures -----------------
+Setting up DB connection (session)
+Fixtures loaded: db_connection (session), module_data (module), temp_dir (function)
+
+--- Running tests.test_auth---
+PASS test_login_expired_token[user=user1, passwd=pass1] (0.0000s)
+PASS test_login_expired_token[user=user2, passwd=pass2] (0.0000s)
+PASS test_login_invalid_credentials[user=user1, passwd=pass1] (0.0000s)
+PASS test_login_invalid_credentials[user=user2, passwd=pass2] (0.0000s)
+PASS test_login_valid_credentials[user=user1, passwd=pass1] (0.0000s)
+PASS test_login_valid_credentials[user=user2, passwd=pass2] (0.0000s)
+
+--- Running tests.test_cart---
+PASS test_add_item[product_id=p1, quantity=6] (0.0000s)
+PASS test_add_item[product_id=p2, quantity=5] (0.0000s)
+PASS test_checkout (0.0000s)
+PASS test_clear_cart (0.0000s)
+SKIP test_payment (Not implemented)
+PASS test_remove_item[product_id=p1] (0.0000s)
+PASS test_remove_item[product_id=p2] (0.0000s)
+PASS test_update_item[product_id=p1, quantity=6] (0.0000s)
+PASS test_update_item[product_id=p2, quantity=5] (0.0000s)
+
+--- Running tests.test_fix---
+Setting up module data
+Creating temp dir: C:\Users\vg940\AppData\Local\Temp\tmp5lyfmgsi
+PASS test_combined[x=1, y=2, z=3] (0.0049s)
+Creating temp dir: C:\Users\vg940\AppData\Local\Temp\tmpk66xxb7p
+PASS test_combined[x=2, y=3, z=5] (0.0010s)
+Creating temp dir: C:\Users\vg940\AppData\Local\Temp\tmpotw9_0ne
+PASS test_db_connection (0.0014s)
+PASS test_module (0.0000s)
+PASS test_param[x=1] (0.0000s)
+PASS test_param[x=2] (0.0000s)
+PASS test_param[x=3] (0.0000s)
+
+=== Summary ===
+22 tests | 21 passed | 0 failed | 1 skipped | 0 errors
+Total time: 0.0234s 
+
+
+Results with 4 Multiprocessing Worker
+
+------------- Test Discovery -----------------
+Found 13 tests and  3 modules  
+
+------------- Loading Fixtures -----------------
+Setting up DB connection (session)
+Fixtures loaded: db_connection (session), module_data (module), temp_dir (function)
+Setting up module data
+Creating temp dir: C:\Users\vg940\AppData\Local\Temp\tmpabdkmuvg
+Setting up module data
+Setting up module data
+Setting up DB connection (session)
+Creating temp dir: C:\Users\vg940\AppData\Local\Temp\tmpt46idl7u
+Setting up DB connection (session)
+Creating temp dir: C:\Users\vg940\AppData\Local\Temp\tmpjkwzo_rf
+
+=== Execution (4 workers) ===
+
+tests/test_auth.py
+PASS  test_login_expired_token[user=user1, passwd=pass1] [0.0000s]
+PASS  test_login_expired_token[user=user2, passwd=pass2] [0.0000s]
+PASS  test_login_invalid_credentials[user=user1, passwd=pass1] [0.0000s]
+PASS  test_login_invalid_credentials[user=user2, passwd=pass2] [0.0000s]
+PASS  test_login_valid_credentials[user=user1, passwd=pass1] [0.0000s]
+PASS  test_login_valid_credentials[user=user2, passwd=pass2] [0.0000s]
+
+tests/test_cart.py
+PASS  test_add_item[product_id=p1, quantity=6]           [0.0000s]
+PASS  test_add_item[product_id=p2, quantity=5]           [0.0000s]
+PASS  test_checkout                                      [0.0000s]
+PASS  test_clear_cart                                    [0.0000s]
+SKIP  test_payment                                       (skipped: Not implemented)
+PASS  test_remove_item[product_id=p1]                    [0.0000s]
+PASS  test_remove_item[product_id=p2]                    [0.0000s]
+PASS  test_update_item[product_id=p1, quantity=6]        [0.0000s]
+PASS  test_update_item[product_id=p2, quantity=5]        [0.0000s]
+
+tests/test_fix.py
+PASS  test_combined[x=1, y=2, z=3]                       [0.0050s]
+PASS  test_combined[x=2, y=3, z=5]                       [0.0050s]
+PASS  test_db_connection                                 [0.0010s]
+PASS  test_module                                        [0.0000s]
+PASS  test_param[x=1]                                    [0.0000s]
+PASS  test_param[x=2]                                    [0.0000s]
+PASS  test_param[x=3]                                    [0.0010s]
+
+
+=== Summary ===
+22 tests | 21 passed | 0 failed | 1 skipped | 0 errors
+Total time: 0.20s (parallel across 4 workers)

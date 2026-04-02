@@ -41,6 +41,7 @@ user_map = {}
 
 async def send_room(room, message):
     for conn in rooms.get(room, []):
+        print(conn)
         await conn.send_text(message)
 
 
