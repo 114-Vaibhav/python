@@ -1,0 +1,38 @@
+CREATE NODE (alice:Person {name: "Alice", age: 30, city: "Delhi"})
+CREATE NODE (bob:Person {name: "Bob", age: 28, city: "Delhi"})
+CREATE NODE (charlie:Person {name: "Charlie", age: 35, city: "Mumbai"})
+CREATE NODE (david:Person {name: "David", age: 40, city: "Bangalore"})
+CREATE NODE (eva:Person {name: "Eva", age: 26, city: "Delhi"})
+CREATE NODE (acme:Company {name: "Acme Corp", industry: "Tech"})
+CREATE NODE (google:Company {name: "Google", industry: "Tech"})
+CREATE NODE (amazon:Company {name: "Amazon", industry: "Ecommerce"})
+
+CREATE EDGE (alice)-[:FRIENDS_WITH {since: 2020}]->(bob)
+CREATE EDGE (bob)-[:FRIENDS_WITH {since: 2019}]->(charlie)
+CREATE EDGE (charlie)-[:FRIENDS_WITH {since: 2018}]->(david)
+CREATE EDGE (david)-[:FRIENDS_WITH {since: 2021}]->(eva)
+
+CREATE EDGE (bob)-[:WORKS_AT {role: "Engineer"}]->(acme)
+CREATE EDGE (charlie)-[:WORKS_AT {role: "Manager"}]->(google)
+CREATE EDGE (david)-[:WORKS_AT {role: "Lead"}]->(amazon)
+CREATE EDGE (eva)-[:WORKS_AT {role: "Analyst"}]->(acme)
+
+STATS
+
+MATCH (p:Person)-[:FRIENDS_WITH]->()-[:WORKS_AT]->(c:Company) RETURN p.name, c.name
+
+MATCH (p:Person)-[:FRIENDS_WITH]->()-[:WORKS_AT]->(c:Company) WHERE c.name = "Acme Corp" RETURN p.name, c.name
+
+MATCH (p:Person)-[:FRIENDS_WITH]->()-[:WORKS_AT]->(c:Company) WHERE c.name = "Google" RETURN p.name, c.name
+
+MATCH (p:Person)-[:FRIENDS_WITH]->()-[:WORKS_AT]->(c:Company) WHERE c.name = "Amazon" RETURN p.name, c.name
+
+MATCH (p:Person)-[:FRIENDS_WITH]->()-[:WORKS_AT]->(c:Company) WHERE p.name = "Alice" RETURN p.name, c.name
+
+SHORTEST PATH (alice)->(acme)
+SHORTEST PATH (alice)->(google)
+SHORTEST PATH (alice)->(amazon)
+
+CREATE EDGE (unknown)-[:TEST {x:1}]->(alice)
+
+STATS

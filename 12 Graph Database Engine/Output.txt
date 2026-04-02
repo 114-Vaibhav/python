@@ -1,0 +1,195 @@
+PS E:\Intern Work\Python\python\12 Graph Database Engine> python -u "e:\Intern Work\Python\python\12 Graph Database Engine\QueryEngine.py"
+=== Graph DB Shell ===
+graphdb> CREATE NODE (alice:Person {name: "Alice", age: 30, city: "Delhi"})
+{'name': 'Alice', 'age': 30, 'city': 'Delhi'}
+Node added: alice
+graphdb> CREATE NODE (bob:Person {name: "Bob", age: 28, city: "Delhi"})
+{'name': 'Bob', 'age': 28, 'city': 'Delhi'}
+Node added: bob
+graphdb> CREATE NODE (charlie:Person {name: "Charlie", age: 35, city: "Mumbai"})
+{'name': 'Charlie', 'age': 35, 'city': 'Mumbai'}
+Node added: charlie
+graphdb> CREATE NODE (david:Person {name: "David", age: 40, city: "Bangalore"})
+{'name': 'David', 'age': 40, 'city': 'Bangalore'}
+Node added: david
+graphdb> CREATE NODE (eva:Person {name: "Eva", age: 26, city: "Delhi"})
+{'name': 'Eva', 'age': 26, 'city': 'Delhi'}
+Node added: eva
+graphdb> CREATE NODE (acme:Company {name: "Acme Corp", industry: "Tech"})
+{'name': 'Acme Corp', 'industry': 'Tech'}
+Node added: acme
+graphdb> CREATE NODE (google:Company {name: "Google", industry: "Tech"})
+{'name': 'Google', 'industry': 'Tech'}
+Node added: google
+graphdb> CREATE NODE (amazon:Company {name: "Amazon", industry: "Ecommerce"})
+{'name': 'Amazon', 'industry': 'Ecommerce'}
+Node added: amazon
+graphdb> 
+Error: Invalid command
+graphdb> CREATE EDGE (alice)-[:FRIENDS_WITH {since: 2020}]->(bob)
+Edge added: alice -> bob
+graphdb> CREATE EDGE (bob)-[:FRIENDS_WITH {since: 2019}]->(charlie)
+Edge added: bob -> charlie
+graphdb> CREATE EDGE (charlie)-[:FRIENDS_WITH {since: 2018}]->(david)
+Edge added: charlie -> david
+graphdb> CREATE EDGE (david)-[:FRIENDS_WITH {since: 2021}]->(eva)
+Edge added: david -> eva
+graphdb>
+Error: Invalid command
+graphdb> CREATE EDGE (bob)-[:WORKS_AT {role: "Engineer"}]->(acme)
+Edge added: bob -> acme
+graphdb> CREATE EDGE (charlie)-[:WORKS_AT {role: "Manager"}]->(google)
+Edge added: charlie -> google
+graphdb> CREATE EDGE (david)-[:WORKS_AT {role: "Lead"}]->(amazon)
+Edge added: david -> amazon
+graphdb> CREATE EDGE (eva)-[:WORKS_AT {role: "Analyst"}]->(acme)
+Edge added: eva -> acme
+graphdb> STATS                                                                  
+Number of nodes: 8
+Number of edges: 8
+Indexs of nodes: 8
+Indexs of name: 8
+Indexs of age: 5
+Indexs of city: 3
+Indexs of industry: 2
+WAL:  16
+Last Disk Snapshot: 2026-04-02T18:17:16.542518
+graphdb> MATCH (p:Person)-[:FRIENDS_WITH]->()-[:WORKS_AT]->(c:Company) RETURN p.name, c.name
+------------------------------
+Alice | Acme Corp
+Bob | Google
+Charlie | Amazon
+David | Acme Corp
+------------------------------
+4 rows returned
+graphdb> MATCH (p:Person)-[:FRIENDS_WITH]->()-[:WORKS_AT]->(c:Company) WHERE c.name = "Acme Corp" RETURN p.name, c.name
+------------------------------
+Alice | Acme Corp
+David | Acme Corp
+------------------------------
+2 rows returned
+graphdb> MATCH (p:Person)-[:FRIENDS_WITH]->()-[:WORKS_AT]->(c:Company) WHERE c.name = "Google" RETURN p.name, c.name
+------------------------------
+Bob | Google
+------------------------------
+1 rows returned
+graphdb> MATCH (p:Person)-[:FRIENDS_WITH]->()-[:WORKS_AT]->(c:Company) WHERE c.name = "Amazon" RETURN p.name, c.name
+------------------------------
+Charlie | Amazon
+------------------------------
+1 rows returned
+graphdb> MATCH (p:Person)-[:FRIENDS_WITH]->()-[:WORKS_AT]->(c:Company) WHERE p.name = "Alice" RETURN p.name, c.name
+------------------------------
+Alice | Acme Corp
+------------------------------
+1 rows returned
+graphdb> SHORTEST PATH (alice)->(acme)
+Path: alice  - FRIENDS_WITH -> bob  - WORKS_AT -> acme 
+Length:  2.0
+Total Weight:  2.0
+graphdb> SHORTEST PATH (alice)->(google)
+Path: alice  - FRIENDS_WITH -> bob  - FRIENDS_WITH -> charlie  - WORKS_AT -> google 
+Length:  3.0
+Total Weight:  3.0
+graphdb> SHORTEST PATH (alice)->(amazon)
+Path: alice  - FRIENDS_WITH -> bob  - FRIENDS_WITH -> charlie  - FRIENDS_WITH -> david  - WORKS_AT -> amazon 
+Length:  4.0
+Total Weight:  4.0
+graphdb> CREATE EDGE (unknown)-[:TEST {x:1}]->(alice)
+Error: Both nodes must exist in graph
+graphdb>
+
+# After Killing Terminal.....
+
+Recovering from WAL...
+{'name': 'Alice', 'age': 30, 'city': 'Delhi'}
+Node added: alice
+{'name': 'Bob', 'age': 28, 'city': 'Delhi'}
+Node added: bob
+{'name': 'Charlie', 'age': 35, 'city': 'Mumbai'}
+Node added: charlie
+{'name': 'David', 'age': 40, 'city': 'Bangalore'}
+Node added: david
+{'name': 'Eva', 'age': 26, 'city': 'Delhi'}
+Node added: eva
+{'name': 'Acme Corp', 'industry': 'Tech'}
+Node added: acme
+{'name': 'Google', 'industry': 'Tech'}
+Node added: google
+{'name': 'Amazon', 'industry': 'Ecommerce'}
+Node added: amazon
+Edge added: alice -> bob
+Edge added: bob -> charlie
+Edge added: charlie -> david
+Edge added: david -> eva
+Edge added: bob -> acme
+Edge added: charlie -> google
+Edge added: david -> amazon
+Edge added: eva -> acme
+=== Graph DB Shell ===
+graphdb> STATS
+Number of nodes: 8
+Number of edges: 8
+Indexs of nodes: 8 
+Indexs of name: 8
+Indexs of age: 5
+Indexs of city: 3
+Indexs of industry: 2
+WAL:  16
+Last Disk Snapshot: 2026-04-02T18:17:16.542518
+graphdb>
+
+
+
+
+
+
+
+#Graph Testing Output
+
+===== START TESTS =====
+
+Edge added: alice -> bob
+Edge added: bob -> charlie
+Edge added: charlie -> google
+
+--- Adjacency List ---
+alice: [('bob', <__main__.Edge object at 0x0000027A8B58F1D0>)]
+bob: [('charlie', <__main__.Edge object at 0x0000027A8B58F200>)]
+charlie: [('google', <__main__.Edge object at 0x0000027A8B58F230>)]
+google: []
+
+--- Get Node ---
+<__main__.Node object at 0x0000027A8B58EE40>
+None
+
+--- Property Search ---
+City = Delhi: ['bob', 'charlie']
+Age = 25: ['alice']
+Invalid: []
+
+--- Neighbors ---
+Alice neighbors: [('bob', <__main__.Edge object at 0x0000027A8B58F1D0>)]
+Bob neighbors: [('charlie', <__main__.Edge object at 0x0000027A8B58F200>)]
+Unknown neighbors: []
+
+--- Shortest Path ---
+Path: alice  - KNOWS -> bob  - KNOWS -> charlie  - WORKS_AT -> google
+Length:  3.0
+Total Weight:  3.0
+Path: alice  - KNOWS -> bob  - KNOWS -> charlie
+Length:  2.0
+Total Weight:  2.0
+
+--- Duplicate Node Test ---
+Caught: Node alice already exists
+
+--- Invalid Edge Test ---
+Caught: Both nodes must exist in graph
+
+--- Add Node + Index Update ---
+{'age': 28, 'city': 'Delhi'}
+Node added: dave
+City = Delhi after adding dave: ['bob', 'charlie', 'dave']
+
+===== END TESTS =====

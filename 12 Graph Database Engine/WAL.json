@@ -1,0 +1,66 @@
+[
+    {
+        "timestamp": "2026-04-02T18:17:01.791035",
+        "command": "CREATE NODE (alice:Person {name: \"Alice\", age: 30, city: \"Delhi\"})"
+    },
+    {
+        "timestamp": "2026-04-02T18:17:01.793546",
+        "command": "CREATE NODE (bob:Person {name: \"Bob\", age: 28, city: \"Delhi\"})"
+    },
+    {
+        "timestamp": "2026-04-02T18:17:01.795809",
+        "command": "CREATE NODE (charlie:Person {name: \"Charlie\", age: 35, city: \"Mumbai\"})"
+    },
+    {
+        "timestamp": "2026-04-02T18:17:01.798809",
+        "command": "CREATE NODE (david:Person {name: \"David\", age: 40, city: \"Bangalore\"})"
+    },
+    {
+        "timestamp": "2026-04-02T18:17:01.806919",
+        "command": "CREATE NODE (eva:Person {name: \"Eva\", age: 26, city: \"Delhi\"})"
+    },
+    {
+        "timestamp": "2026-04-02T18:17:01.810915",
+        "command": "CREATE NODE (acme:Company {name: \"Acme Corp\", industry: \"Tech\"})"
+    },
+    {
+        "timestamp": "2026-04-02T18:17:01.818571",
+        "command": "CREATE NODE (google:Company {name: \"Google\", industry: \"Tech\"})"
+    },
+    {
+        "timestamp": "2026-04-02T18:17:15.353445",
+        "command": "CREATE NODE (amazon:Company {name: \"Amazon\", industry: \"Ecommerce\"})"
+    },
+    {
+        "timestamp": "2026-04-02T18:17:16.505438",
+        "command": "CREATE EDGE (alice)-[:FRIENDS_WITH {since: 2020}]->(bob)"
+    },
+    {
+        "timestamp": "2026-04-02T18:17:16.508436",
+        "command": "CREATE EDGE (bob)-[:FRIENDS_WITH {since: 2019}]->(charlie)"
+    },
+    {
+        "timestamp": "2026-04-02T18:17:16.512963",
+        "command": "CREATE EDGE (charlie)-[:FRIENDS_WITH {since: 2018}]->(david)"
+    },
+    {
+        "timestamp": "2026-04-02T18:17:16.525467",
+        "command": "CREATE EDGE (david)-[:FRIENDS_WITH {since: 2021}]->(eva)"
+    },
+    {
+        "timestamp": "2026-04-02T18:17:16.529591",
+        "command": "CREATE EDGE (bob)-[:WORKS_AT {role: \"Engineer\"}]->(acme)"
+    },
+    {
+        "timestamp": "2026-04-02T18:17:16.535027",
+        "command": "CREATE EDGE (charlie)-[:WORKS_AT {role: \"Manager\"}]->(google)"
+    },
+    {
+        "timestamp": "2026-04-02T18:17:16.539520",
+        "command": "CREATE EDGE (david)-[:WORKS_AT {role: \"Lead\"}]->(amazon)"
+    },
+    {
+        "timestamp": "2026-04-02T18:17:16.542518",
+        "command": "CREATE EDGE (eva)-[:WORKS_AT {role: \"Analyst\"}]->(acme)"
+    }
+]
