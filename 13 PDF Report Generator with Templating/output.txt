@@ -1,0 +1,60 @@
+Enter the month: 2
+Enter the year: 2026
+
+ Monthly Sales Report (Feb 2026)
+-----------------------------------
+Total Revenue: 53159.0
+Total Units Sold: 445
+Average Revenue per Sale: 2797.84
+
+ Region-wise Revenue:
+East: 9959.13
+West: 9108.67
+South: 15617.3
+North: 18473.9
+
+ Region-wise Units Sold:
+East: 83
+West: 96
+South: 102
+North: 164
+ Report generated: output/report.html
+ PDF generated: reports\2_2026_monthly_sales_report.pdf
+Sending Email.............
+Email will be sent to: vaihing00@gmail.com, vgsk1504@gmail.com
+Email subject: Monthly Sales Report
+Email attachment: 2_2026_monthly_sales_report.pdf
+ Email sent successfully with PDF attachment!
+
+
+
+
+
+Enter the month: 1
+Enter the year: 2026
+
+ Monthly Sales Report (Feb 2026)
+-----------------------------------
+Total Revenue: 101630.57
+Total Units Sold: 842
+Average Revenue per Sale: 3175.96
+
+ Region-wise Revenue:
+South: 40527.5
+East: 13435.64
+North: 25566.43
+West: 22101.0
+
+ Region-wise Units Sold:
+South: 266
+East: 174
+North: 259
+West: 143
+ Report generated: output/report.html
+ PDF generated: reports\1_2026_monthly_sales_report.pdf
+Sending Email.............
+Email will be sent to: vaihing00@gmail.com, vgsk1504@gmail.com
+Email subject: Monthly Sales Report
+Email attachment: 1_2026_monthly_sales_report.pdf
+ Email sent successfully with PDF attachment!
+(.venv) PS E:\Intern Work\Python\python\13 PDF Re

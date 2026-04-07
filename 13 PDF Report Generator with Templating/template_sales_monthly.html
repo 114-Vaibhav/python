@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Monthly Sales Report</title>
+    <style>
+        body {
+            font-family: Arial;
+            margin: 40px;
+            background: #f4f6f8;
+        }
+
+        h1,
+        h2 {
+            color: #333;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        img {
+            max-width: 100%;
+            border-radius: 6px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>📊 Monthly Sales Report ({{ month }}-{{ year }})</h1>
+
+    <div class="card">
+        <h2>Summary</h2>
+        <p><strong>Total Revenue:</strong> {{ total_revenue }}</p>
+        <p><strong>Total Units Sold:</strong> {{ total_units }}</p>
+        <p><strong>Average Revenue per Sale:</strong> {{ avg_revenue }}</p>
+    </div>
+
+    <div class="card">
+        <h2>🌍 Region-wise Revenue</h2>
+        <table>
+            <tr>
+                <th>Region</th>
+                <th>Revenue</th>
+            </tr>
+            {% for region, revenue in region_revenue.items() %}
+            <tr>
+                <td>{{ region }}</td>
+                <td>{{ revenue }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div class="card">
+        <h2>📦 Units Sold by Region</h2>
+        <table>
+            <tr>
+                <th>Region</th>
+                <th>Units</th>
+            </tr>
+            {% for region, units in region_units.items() %}
+            <tr>
+                <td>{{ region }}</td>
+                <td>{{ units }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div class="card">
+        <h2>📈 Daily Revenue Trend</h2>
+        <img src="{{ daily_chart }}" alt="Daily Revenue">
+    </div>
+
+    <div class="card">
+        <h2>📊 Revenue by Region</h2>
+        <img src="{{ region_chart }}" alt="Region Revenue">
+    </div>
+
+    <div class="card">
+        <h2>🥧 Revenue Distribution</h2>
+        <img src="{{ pie_chart }}" alt="Pie Chart">
+    </div>
+
+    <div class="card">
+        <h2>📦 Units Sold</h2>
+        <img src="{{ units_chart }}" alt="Units Chart">
+    </div>
+
+</body>
+
+</html>
