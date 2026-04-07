@@ -1,0 +1,2 @@
+python main.py --url http://books.toscrape.com/ --depth 1 --concurrency 20
+python main.py --url http://the-internet.herokuapp.com/status_codes --depth 2

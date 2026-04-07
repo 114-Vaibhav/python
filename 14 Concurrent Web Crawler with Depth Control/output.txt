@@ -1,0 +1,45 @@
+Seed URL: http://the-internet.herokuapp.com/status_codes
+Max Depth: 2
+Concurrency: 5
+Robots URL: http://the-internet.herokuapp.com/robots.txt
+[DEPTH 0] http://the-internet.herokuapp.com/status_codes 200 0.62s
+[DEPTH 1] http://the-internet.herokuapp.com/status_codes/200 200 0.27s
+[DEPTH 1] http://the-internet.herokuapp.com/status_codes/301 301 0.61s
+[DEPTH 1] http://the-internet.herokuapp.com/status_codes/404 404 0.61s
+[DEPTH 1] http://the-internet.herokuapp.com/status_codes/500 500 0.61s
+
+=== Crawl Complete ===
+Pages crawled: 5
+Unique URLs: 5
+
+=== SEO Audit Report ===
+Broken Links:
+http://the-internet.herokuapp.com/status_codes/404 (linked from: ['http://the-internet.herokuapp.com/status_codes'])
+Redirected Links:
+http://the-internet.herokuapp.com/status_codes/301 -> http://the-internet.herokuapp.com/status_codes/301
+Orphan Pages:
+Crawl Graph saved to output\the-internet.herokuapp.com\crawl_graph.json
+Sitemap saved to output\the-internet.herokuapp.com\sitemap.xml
+
+
+toscrape.com/ --depth 1 --concurrency 20                           
+Seed URL: http://books.toscrape.com/
+Max Depth: 1
+Concurrency: 20
+Robots URL: http://books.toscrape.com/robots.txt
+
+=== Crawl Complete ===
+Pages crawled: 74
+Unique URLs: 74
+
+=== SEO Audit Report ===
+Broken Links:
+Redirected Links:
+Orphan Pages:
+Crawl Graph saved to output\books.toscrape.com\crawl_graph.json
+
+
+
+
+
+

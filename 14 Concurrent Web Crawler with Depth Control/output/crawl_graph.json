@@ -1,0 +1,75 @@
+{
+  "results": {
+    "http://the-internet.herokuapp.com/status_codes": {
+      "url": "http://the-internet.herokuapp.com/status_codes",
+      "redirect_to": "http://the-internet.herokuapp.com/status_codes",
+      "depth": 0,
+      "status": 200,
+      "time": 0.6007223129272461,
+      "links": [
+        "https://github.com/tourdedave/the-internet",
+        "http://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml",
+        "http://the-internet.herokuapp.com/status_codes/200",
+        "http://the-internet.herokuapp.com/status_codes/301",
+        "http://the-internet.herokuapp.com/status_codes/404",
+        "http://the-internet.herokuapp.com/status_codes/500",
+        "http://elementalselenium.com/"
+      ]
+    },
+    "http://the-internet.herokuapp.com/status_codes/200": {
+      "url": "http://the-internet.herokuapp.com/status_codes/200",
+      "redirect_to": "http://the-internet.herokuapp.com/status_codes/200",
+      "depth": 1,
+      "status": 200,
+      "time": 0.2743954658508301,
+      "links": [
+        "https://github.com/tourdedave/the-internet",
+        "http://the-internet.herokuapp.com/status_codes",
+        "http://elementalselenium.com/"
+      ]
+    },
+    "http://the-internet.herokuapp.com/status_codes/301": {
+      "url": "http://the-internet.herokuapp.com/status_codes/301",
+      "redirect_to": "http://the-internet.herokuapp.com/status_codes/301",
+      "depth": 1,
+      "status": 301,
+      "time": 0.9144201278686523,
+      "links": []
+    },
+    "http://the-internet.herokuapp.com/status_codes/404": {
+      "url": "http://the-internet.herokuapp.com/status_codes/404",
+      "redirect_to": "http://the-internet.herokuapp.com/status_codes/404",
+      "depth": 1,
+      "status": 404,
+      "time": 0.5490190982818604,
+      "links": []
+    },
+    "http://the-internet.herokuapp.com/status_codes/500": {
+      "url": "http://the-internet.herokuapp.com/status_codes/500",
+      "redirect_to": "http://the-internet.herokuapp.com/status_codes/500",
+      "depth": 1,
+      "status": 500,
+      "time": 0.5362288951873779,
+      "links": []
+    }
+  },
+  "graph": {
+    "http://the-internet.herokuapp.com/status_codes": [
+      "https://github.com/tourdedave/the-internet",
+      "http://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml",
+      "http://the-internet.herokuapp.com/status_codes/200",
+      "http://the-internet.herokuapp.com/status_codes/301",
+      "http://the-internet.herokuapp.com/status_codes/404",
+      "http://the-internet.herokuapp.com/status_codes/500",
+      "http://elementalselenium.com/"
+    ],
+    "http://the-internet.herokuapp.com/status_codes/200": [
+      "https://github.com/tourdedave/the-internet",
+      "http://the-internet.herokuapp.com/status_codes",
+      "http://elementalselenium.com/"
+    ],
+    "http://the-internet.herokuapp.com/status_codes/301": [],
+    "http://the-internet.herokuapp.com/status_codes/404": [],
+    "http://the-internet.herokuapp.com/status_codes/500": []
+  }
+}
