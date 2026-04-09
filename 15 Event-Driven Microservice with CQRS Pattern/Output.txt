@@ -1,0 +1,127 @@
+
+================ COMMAND SIDE (WRITE) ================
+
+>>> Dispatching PlaceOrderCommand...
+
+[WRITE] Command Received <__main__.PlaceOrderCommand object at 0x000001A4C044BE60>
+[LOAD] Loaded 0 events
+[EVENT STORE] Appended OrderPlaced v1
+[EVENT STORE] Appended InventoryReserved v2
+[EVENT STORE] Appended InventoryReserved v3
+[BUS] Published OrderPlaced
+[HANDLER] Received OrderPlaced
+[HANDLER: Notification] Email sent to vsg
+[HANDLER: Analytics] Revenue updated: 239.96
+[BUS] Published InventoryReserved
+[HANDLER] Received InventoryReserved
+InventoryReserved
+[BUS] Published InventoryReserved
+[HANDLER] Received InventoryReserved
+InventoryReserved
+
+[WRITE] Order created successfully
+[BUS] Events published to subscribers
+
+================ EVENT HANDLERS (ASYNC) ================
+
+Processing projections, notifications, analytics...
+
+
+================ QUERY SIDE (READ) ================
+
+>>> GetOrderSummary("ORD-1001")
+
+{'order_id': 'ORD-1001', 'customer_id': 'vsg', 'items': [{'sku': 'WID-01', 'qty': 3}, {'sku': 'GAD-05', 'qty': 4}], 'item_count': 7, 'total': 239.96, 'status': 'PLACED', 'placed_at': '2026-04-09T12:39:37.418752'}
+
+Response time: ~1-5 ms (denormalized read model)
+
+================ EVENT REPLAY (AUDIT) ================
+
+[Event #1] OrderPlaced @ 2026-04-09T12:39:37.418752
+[Event #2] InventoryReserved @ 2026-04-09T12:39:37.418752
+[Event #3] InventoryReserved @ 2026-04-09T12:39:37.418752
+
+Replaying events to reconstruct state...
+
+Reconstructed State:
+Order(id=ORD-1001, status=PLACED, total=239.96, items=7)
+
+================ EXTENDED TESTS ================
+
+
+--- TEST 1: Place Order Successfully ---
+[WRITE] Command Received <__main__.PlaceOrderCommand object at 0x000001A4C044BE60>
+[LOAD] Loaded 0 events
+[EVENT STORE] Appended OrderPlaced v1
+[EVENT STORE] Appended InventoryReserved v2
+[EVENT STORE] Appended InventoryReserved v3
+[BUS] Published OrderPlaced
+[HANDLER] Received OrderPlaced
+[HANDLER: Notification] Email sent to customer-1
+[HANDLER: Analytics] Revenue updated: 339.96000000000004
+[BUS] Published InventoryReserved
+[HANDLER] Received InventoryReserved
+InventoryReserved
+[BUS] Published InventoryReserved
+[HANDLER] Received InventoryReserved
+InventoryReserved
+
+--- TEST 2: Replay Order State ---
+Order Status after replay: PLACED
+
+--- TEST 3: Duplicate Order (Should Fail) ---
+[WRITE] Command Received <__main__.PlaceOrderCommand object at 0x000001A4C0480080>
+[LOAD] Loaded 3 events
+Expected Error: Order already exists
+
+--- TEST 4: Invalid Order (No Items) ---
+[WRITE] Command Received <__main__.PlaceOrderCommand object at 0x000001A4C044BE60>
+[LOAD] Loaded 0 events
+Expected Error: Order must have at least one item
+
+--- TEST 5: Invalid Order (Negative Total) ---
+[WRITE] Command Received <__main__.PlaceOrderCommand object at 0x000001A4C0480080>
+[LOAD] Loaded 0 events
+Expected Error: Total must be positive
+
+--- TEST 6: Multiple Orders ---
+[WRITE] Command Received <__main__.PlaceOrderCommand object at 0x000001A4C044BE60>
+[LOAD] Loaded 0 events
+[EVENT STORE] Appended OrderPlaced v1
+[EVENT STORE] Appended InventoryReserved v2
+[EVENT STORE] Appended InventoryReserved v3
+[BUS] Published OrderPlaced
+[HANDLER] Received OrderPlaced
+[HANDLER: Notification] Email sent to customer-1
+[HANDLER: Analytics] Revenue updated: 439.96000000000004
+[BUS] Published InventoryReserved
+[HANDLER] Received InventoryReserved
+InventoryReserved
+[BUS] Published InventoryReserved
+[HANDLER] Received InventoryReserved
+InventoryReserved
+
+--- TEST 7: Check Event Versions ---
+OrderPlaced -> version 1
+InventoryReserved -> version 2
+InventoryReserved -> version 3
+
+--- TEST 8: Full Event Store Dump ---
+ORD-1001 OrderPlaced 1
+ORD-1001 InventoryReserved 2
+ORD-1001 InventoryReserved 3
+order-1 OrderPlaced 1
+order-1 InventoryReserved 2
+order-1 InventoryReserved 3
+order-2 OrderPlaced 1
+order-2 InventoryReserved 2
+order-2 InventoryReserved 3
+
+--- TEST 9: Check Read DB ---
+[{'order_id': 'ORD-1001', 'customer_id': 'vsg', 'items': [{'sku': 'WID-01', 'qty': 3}, {'sku': 'GAD-05', 'qty': 4}], 'item_count': 7, 'total': 239.96, 'status': 'PLACED', 'placed_at': '2026-04-09T12:39:37.418752'}, {'order_id': 'order-1', 'customer_id': 'customer-1', 'items': [{'sku': 'item-1', 'qty': 2}, {'sku': 'item-2', 'qty': 1}], 'item_count': 3, 'total': 100, 'status': 'PLACED', 'placed_at': '2026-04-09T12:39:42.451084'}, {'order_id': 'order-2', 'customer_id': 'customer-1', 'items': [{'sku': 'item-12', 'qty': 2}, {'sku': 'item-2', 'qty': 1}], 'item_count': 3, 'total': 100, 'status': 'PLACED', 'placed_at': '2026-04-09T12:39:45.507617'}]
+
+--- TEST 10: Check Order Summary ---
+{'order_id': 'order-2', 'customer_id': 'customer-1', 'items': [{'sku': 'item-12', 'qty': 2}, {'sku': 'item-2', 'qty': 1}], 'item_count': 3, 'total': 100, 'status': 'PLACED', 'placed_at': '2026-04-09T12:39:45.507617'}
+
+--- TEST 11: Check Order Summary for Order 1 ---
+{'order_id': 'order-1', 'customer_id': 'customer-1', 'items': [{'sku': 'item-1', 'qty': 2}, {'sku': 'item-2', 'qty': 1}], 'item_count': 3, 'total': 100, 'status': 'PLACED', 'placed_at': '2026-04-09T12:39:42.451084'}
